@@ -7,7 +7,7 @@
 [![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-green?logo=supabase&logoColor=white)](https://supabase.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38BDF8?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-latest-000000?logo=shadcnui&logoColor=white)](https://ui.shadcn.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Proprietary-red.svg)](#-license--usage)
 
 ---
 
@@ -296,9 +296,44 @@ caddy run --config Caddyfile
 
 ---
 
-## 📝 License
+## 📝 License & Usage
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+> ⚠️ **PROPRIETARY SOFTWARE — ALL RIGHTS RESERVED.**
+
+This software and its source code are the **proprietary intellectual property** of the author (**Shahid-ALI12**). This repository is published for **portfolio and demonstration purposes only**.
+
+### ❌ You May NOT
+- **Copy, clone, or download** the source code for commercial use
+- **Redistribute, resell, sublicense, or host** this software without explicit written permission
+- **Use this code (in part or in full)** to build a competing product or service
+- **Deploy this software** on any production domain without a valid license
+- **Remove or alter** copyright notices, license headers, or watermarks
+
+### ✅ You May
+- **View** the code for educational / reference purposes
+- **Fork** the repository for personal study (forks remain bound by this license)
+- **Contact the author** for a commercial license, deployment, or customization
+
+### 💼 Licensing & Commercial Use
+This software is **licensed per-deployment**. Each customer/client receives a **single-deployment license** that grants usage on one (1) production domain only. Redistribution of the source code to third parties is strictly prohibited and constitutes a breach of license.
+
+For licensing inquiries, custom deployments, or to purchase a license:
+
+- 📧 **Email:** shahidshafaqat2007@gmail.com
+- 💬 **GitHub:** [@Shahid-ALI12](https://github.com/Shahid-ALI12)
+
+### ⚖️ Copyright Notice
+
+```
+Copyright © 2024–2026 Shahid-ALI12. All rights reserved.
+
+Unauthorized copying, distribution, modification, or deployment of this software,
+in whole or in part, via any medium is strictly prohibited without prior written
+authorization from the copyright holder.
+
+Violators will be subject to legal action under applicable copyright and
+intellectual property laws.
+```
 
 ---
 
@@ -306,8 +341,8 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 Built with ❤️ for feed mill businesses.
 
-- GitHub: [@Shahid-ALI12](https://github.com/Shahid-ALI12)
-- Email: shahidshafaqat2007@gmail.com
+- **GitHub:** [@Shahid-ALI12](https://github.com/Shahid-ALI12)
+- **Email:** shahidshafaqat2007@gmail.com
 
 ---
 
