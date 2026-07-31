@@ -100,25 +100,6 @@ cp .env.example .env.local
 npm run dev
 # or
 bun dev
-```
-
-### Environment Variables
-
-Create a `.env.local` file in the root:
-
-```env
-# Supabase
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-
-# Server-only auth secret (DO NOT prefix with NEXT_PUBLIC_)
-CUSTOMER_TOKEN_SECRET=your_strong_random_secret
-
-# App
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
-
 ---
 
 ## 📂 Project Structure
