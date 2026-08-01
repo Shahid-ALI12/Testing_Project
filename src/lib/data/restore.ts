@@ -38,6 +38,7 @@ const RESTORE_ORDER: { table: keyof DatabaseBackup["data"]; kind: "master" | "tr
   { table: "cash_transfers", kind: "transactional" },
   { table: "labour_payments",    kind: "transactional" },
   { table: "labour_daily_wages", kind: "transactional" },
+  { table: "customer_payments",  kind: "transactional" },
 ];
 
 /** Escape a single SQL literal value. */

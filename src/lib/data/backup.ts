@@ -116,6 +116,7 @@ export async function buildDatabaseBackup(
     cash_transfers,
     labour_payments,
     labour_daily_wages,
+    customer_payments,
   ] = await Promise.all([
     fetchByDate<any>("sales", "sale_date", from, to),
     fetchByDate<any>("mix_orders", "order_date", from, to),
@@ -125,6 +126,7 @@ export async function buildDatabaseBackup(
     fetchByDate<any>("cash_transfers", "transfer_date", from, to),
     fetchByDate<any>("labour_payments", "payment_date", from, to),
     fetchByDate<any>("labour_daily_wages", "wage_date", from, to),
+    fetchByDate<any>("customer_payments", "payment_date", from, to),
   ]);
 
   return {
@@ -153,6 +155,7 @@ export async function buildDatabaseBackup(
       cash_transfers,
       labour_payments,
       labour_daily_wages,
+      customer_payments,
     },
   };
 }

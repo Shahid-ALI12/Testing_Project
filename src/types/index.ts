@@ -393,6 +393,8 @@ export interface DatabaseBackup {
     // Labour transactions (date-filtered)
     labour_payments: LabourPayment[];
     labour_daily_wages: LabourDailyWage[];
+    // Customer payments — advance/incoming money without a sale (date-filtered)
+    customer_payments: CustomerPayment[];
   };
   // NOTE: app_customers (login + password hashes) is intentionally EXCLUDED
   // for security. Supabase Auth handles admin accounts separately.
