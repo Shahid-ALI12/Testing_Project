@@ -127,6 +127,9 @@ export default function CustomerKhataPage() {
   const [salesPage, setSalesPage] = useState(1);
   useEffect(() => { setSalesPage(1); }, [selectedCustomerId]);
 
+  // Search filter for the Customer History dropdown (filters by name/phone)
+  const [customerSearch, setCustomerSearch] = useState("");
+
   const salesQ = useSalesPaginated(
     selectedCustomerId ? { customer_id: Number(selectedCustomerId) } : {},
     salesPage,
@@ -224,6 +227,18 @@ export default function CustomerKhataPage() {
     () => (allActiveQ.data?.customers ?? []) as Customer[],
     [allActiveQ.data],
   );
+
+  // Filtered customer list for the Customer History dropdown search
+  const filteredActiveCustomers = useMemo(() => {
+    const q = customerSearch.trim().toLowerCase();
+    const list = allActiveCustomers.filter((c) => c.is_active);
+    if (!q) return list;
+    return list.filter(
+      (c) =>
+        c.name.toLowerCase().includes(q) ||
+        (c.phone ?? "").toLowerCase().includes(q),
+    );
+  }, [allActiveCustomers, customerSearch]);
 
   const selectedCustomer = useMemo(
     () => allActiveCustomers.find((c) => c.id === Number(selectedCustomerId)),
@@ -739,14 +754,32 @@ export default function CustomerKhataPage() {
                   <SelectValue placeholder="Select a customer..." />
                 </SelectTrigger>
                 <SelectContent>
-                  {allActiveCustomers
-                    .filter((c) => c.is_active)
-                    .map((c) => (
+                  {/* Search bar inside dropdown — filters customer list by name/phone */}
+                  <div className="p-2 border-b border-slate-100 sticky top-0 bg-white z-10">
+                    <div className="relative">
+                      <Search className="absolute left-2 top-1/2 -translate-y-1/2 size-3.5 text-slate-400 pointer-events-none" />
+                      <Input
+                        placeholder="Search customer name or phone..."
+                        value={customerSearch}
+                        onChange={(e) => setCustomerSearch(e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                        onKeyDown={(e) => e.stopPropagation()}
+                        className="h-8 pl-7 text-xs"
+                      />
+                    </div>
+                  </div>
+                  {filteredActiveCustomers.length === 0 ? (
+                    <div className="px-3 py-6 text-center text-xs text-slate-400">
+                      No customers match "{customerSearch}"
+                    </div>
+                  ) : (
+                    filteredActiveCustomers.map((c) => (
                       <SelectItem key={c.id} value={String(c.id)}>
                         {c.name}
                         {c.phone ? ` — ${c.phone}` : ""}
                       </SelectItem>
-                    ))}
+                    ))
+                  )}
                 </SelectContent>
               </Select>
               {selectedCustomerId && (
