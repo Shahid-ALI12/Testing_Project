@@ -754,32 +754,14 @@ export default function CustomerKhataPage() {
                   <SelectValue placeholder="Select a customer..." />
                 </SelectTrigger>
                 <SelectContent>
-                  {/* Search bar inside dropdown — filters customer list by name/phone */}
-                  <div className="p-2 border-b border-slate-100 sticky top-0 bg-white z-10">
-                    <div className="relative">
-                      <Search className="absolute left-2 top-1/2 -translate-y-1/2 size-3.5 text-slate-400 pointer-events-none" />
-                      <Input
-                        placeholder="Search customer name or phone..."
-                        value={customerSearch}
-                        onChange={(e) => setCustomerSearch(e.target.value)}
-                        onClick={(e) => e.stopPropagation()}
-                        onKeyDown={(e) => e.stopPropagation()}
-                        className="h-8 pl-7 text-xs"
-                      />
-                    </div>
-                  </div>
-                  {filteredActiveCustomers.length === 0 ? (
-                    <div className="px-3 py-6 text-center text-xs text-slate-400">
-                      No customers match "{customerSearch}"
-                    </div>
-                  ) : (
-                    filteredActiveCustomers.map((c) => (
+                  {allActiveCustomers
+                    .filter((c) => c.is_active)
+                    .map((c) => (
                       <SelectItem key={c.id} value={String(c.id)}>
                         {c.name}
                         {c.phone ? ` — ${c.phone}` : ""}
                       </SelectItem>
-                    ))
-                  )}
+                    ))}
                 </SelectContent>
               </Select>
               {selectedCustomerId && (
@@ -816,6 +798,69 @@ export default function CustomerKhataPage() {
               )}
             </div>
           </div>
+        </div>
+
+        {/* Standalone search bar — shows live filtered customer results */}
+        <div className="px-4 sm:px-6 pt-4 pb-2 border-b border-slate-100 bg-slate-50/40">
+          <div className="relative max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400 pointer-events-none" />
+            <Input
+              placeholder="Search customer by name or phone..."
+              value={customerSearch}
+              onChange={(e) => setCustomerSearch(e.target.value)}
+              className="pl-9 bg-white"
+            />
+            {customerSearch && (
+              <button
+                type="button"
+                onClick={() => setCustomerSearch("")}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 px-1"
+                aria-label="Clear search"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
+          {/* Live results list — appears below search bar */}
+          {customerSearch.trim() && (
+            <div className="mt-2 max-w-md">
+              {filteredActiveCustomers.length === 0 ? (
+                <div className="px-3 py-3 text-sm text-slate-500 bg-white rounded-md border border-slate-200">
+                  No customers match <span className="font-semibold">"{customerSearch}"</span>
+                </div>
+              ) : (
+                <div className="bg-white rounded-md border border-slate-200 shadow-sm divide-y divide-slate-100 max-h-60 overflow-y-auto">
+                  {filteredActiveCustomers.slice(0, 20).map((c) => (
+                    <button
+                      key={c.id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedCustomerId(String(c.id));
+                        setCustomerSearch("");
+                      }}
+                      className={`w-full text-left px-3 py-2 text-sm hover:bg-emerald-50 transition-colors flex items-center justify-between gap-2 ${
+                        selectedCustomerId === String(c.id) ? "bg-emerald-50 text-emerald-700" : "text-slate-700"
+                      }`}
+                    >
+                      <span className="font-medium truncate">
+                        {c.name}
+                        {c.phone ? <span className="text-slate-500 font-normal"> — {c.phone}</span> : null}
+                      </span>
+                      {selectedCustomerId === String(c.id) && (
+                        <span className="text-xs text-emerald-600 shrink-0">Selected</span>
+                      )}
+                    </button>
+                  ))}
+                  {filteredActiveCustomers.length > 20 && (
+                    <div className="px-3 py-2 text-xs text-slate-400 text-center bg-slate-50">
+                      Showing 20 of {filteredActiveCustomers.length} matches — refine your search to narrow down
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {!selectedCustomerId ? (
