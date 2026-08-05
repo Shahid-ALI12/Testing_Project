@@ -494,7 +494,8 @@ export default function CustomMixOrder() {
         });
         if (!custRes.ok) throw new Error(await apiError(custRes, "Failed to create customer"));
         const custData = await custRes.json();
-        customerId = custData.customer?.id;
+        // Accept both shapes: { id, ... } (raw row) and { customer: { id, ... } } (wrapped)
+        customerId = custData?.id ?? custData?.customer?.id;
         if (!customerId) throw new Error("Customer creation returned no ID");
         invalidateCache("customers");
       }
